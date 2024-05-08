@@ -15,32 +15,33 @@ namespace CupheadTrainer
     public partial class MainForm : Form
     {
         public Mem memory = new Mem();
-        bool processOpened = false;
+        private bool processOpened = false;
 
         public MainForm()
         {
             InitializeComponent();
-        }
-
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            while (true)
-            {
-                if (!memory.OpenProcess("Cuphead"))
-                {
-                    Thread.Sleep(1000);
-                    return;
-                }
-
-                processOpened = true;
-                Thread.Sleep(1000);
-                backgroundWorker.ReportProgress(0);
-            }
+            timerProcessFinder.Interval = 1000;
+            timerProcessFinder.Tick += new EventHandler(timerProcessTick);
+            timerProcessFinder.Start();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
             backgroundWorker.RunWorkerAsync();
+        }
+
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            processOpened = memory.OpenProcess("Cuphead");
+            if (processOpened)
+            {
+                Thread.Sleep(1000);
+                return;
+            }
+
+            processOpened = true;
+            Thread.Sleep(1000);
+            backgroundWorker.ReportProgress(0);
         }
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -49,11 +50,33 @@ namespace CupheadTrainer
             {
                 lblProcessStatus.Text = "Game Process was found!";
             }
+            else
+            {
+                lblProcessStatus.Text = "Game process NOT found!";
+            }
         }
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            backgroundWorker.RunWorkerAsync();
+
+        }
+
+        private void timerProcessTick(object sender, EventArgs e)
+        {
+            processOpened = memory.OpenProcess("Cuphead");
+            UpdateStatusLabel();
+        }
+
+        private void UpdateStatusLabel()
+        {
+            if (processOpened)
+            {
+                lblProcessStatus.Text = "Game Process was found!";
+            }
+            else
+            {
+                lblProcessStatus.Text = "Game process NOT found!";
+            }
         }
     }
 }

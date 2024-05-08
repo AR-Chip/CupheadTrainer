@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.lblProcess = new System.Windows.Forms.Label();
             this.lblProcessStatus = new System.Windows.Forms.Label();
+            this.timerProcessFinder = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // backgroundWorker
@@ -54,9 +56,9 @@
             this.lblProcessStatus.AutoSize = true;
             this.lblProcessStatus.Location = new System.Drawing.Point(66, 9);
             this.lblProcessStatus.Name = "lblProcessStatus";
-            this.lblProcessStatus.Size = new System.Drawing.Size(105, 13);
+            this.lblProcessStatus.Size = new System.Drawing.Size(134, 13);
             this.lblProcessStatus.TabIndex = 1;
-            this.lblProcessStatus.Text = "Process not opened.";
+            this.lblProcessStatus.Text = "Game process NOT found!";
             // 
             // MainForm
             // 
@@ -78,6 +80,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.Label lblProcess;
         private System.Windows.Forms.Label lblProcessStatus;
+        private System.Windows.Forms.Timer timerProcessFinder;
     }
 }
 
