@@ -39,7 +39,9 @@ namespace CupheadTrainer
                 return;
             }
 
-            processOpened = true;
+            //memory.WriteMemory("rsi+000000B4");
+            //memory.
+
             Thread.Sleep(1000);
             backgroundWorker.ReportProgress(0);
         }

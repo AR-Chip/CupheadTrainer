@@ -33,6 +33,7 @@
             this.lblProcess = new System.Windows.Forms.Label();
             this.lblProcessStatus = new System.Windows.Forms.Label();
             this.timerProcessFinder = new System.Windows.Forms.Timer(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // backgroundWorker
@@ -81,6 +82,7 @@
         private System.Windows.Forms.Label lblProcess;
         private System.Windows.Forms.Label lblProcessStatus;
         private System.Windows.Forms.Timer timerProcessFinder;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
