@@ -33,7 +33,6 @@
             this.lblProcess = new System.Windows.Forms.Label();
             this.lblProcessStatus = new System.Windows.Forms.Label();
             this.timerProcessFinder = new System.Windows.Forms.Timer(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // backgroundWorker
@@ -41,7 +40,6 @@
             this.backgroundWorker.WorkerReportsProgress = true;
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
             // lblProcess
             // 
@@ -70,7 +68,6 @@
             this.Controls.Add(this.lblProcess);
             this.Name = "MainForm";
             this.Text = "Form1";
-            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -82,7 +79,6 @@
         private System.Windows.Forms.Label lblProcess;
         private System.Windows.Forms.Label lblProcessStatus;
         private System.Windows.Forms.Timer timerProcessFinder;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

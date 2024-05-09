@@ -14,70 +14,38 @@ namespace CupheadTrainer
 {
     public partial class MainForm : Form
     {
-        public Mem memory = new Mem();
+        private Mem memory = new Mem();
         private bool processOpened = false;
 
         public MainForm()
         {
             InitializeComponent();
-            timerProcessFinder.Interval = 1000;
-            timerProcessFinder.Tick += new EventHandler(timerProcessTick);
-            timerProcessFinder.Start();
-        }
-
-        private void MainForm_Shown(object sender, EventArgs e)
-        {
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.WorkerSupportsCancellation = true;
+            this.FormClosing += MainForm_FormClosing;
             backgroundWorker.RunWorkerAsync();
         }
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            processOpened = memory.OpenProcess("Cuphead");
-            if (processOpened)
+            while (!backgroundWorker.CancellationPending)
             {
+                processOpened = memory.OpenProcess("Cuphead");
+                backgroundWorker.ReportProgress(processOpened ? 1 : 0);
                 Thread.Sleep(1000);
-                return;
             }
-
-            //memory.WriteMemory("rsi+000000B4");
-            //memory.
-
-            Thread.Sleep(1000);
-            backgroundWorker.ReportProgress(0);
         }
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (processOpened)
-            {
-                lblProcessStatus.Text = "Game Process was found!";
-            }
-            else
-            {
-                lblProcessStatus.Text = "Game process NOT found!";
-            }
+            lblProcessStatus.Text = e.ProgressPercentage == 1 ? "Game Process was found!" : "Game process NOT found!";
         }
 
-        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-        }
-
-        private void timerProcessTick(object sender, EventArgs e)
-        {
-            processOpened = memory.OpenProcess("Cuphead");
-            UpdateStatusLabel();
-        }
-
-        private void UpdateStatusLabel()
-        {
-            if (processOpened)
+            if (backgroundWorker.IsBusy)
             {
-                lblProcessStatus.Text = "Game Process was found!";
-            }
-            else
-            {
-                lblProcessStatus.Text = "Game process NOT found!";
+                backgroundWorker.CancelAsync();
             }
         }
     }
