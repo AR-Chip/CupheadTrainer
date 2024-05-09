@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -44,7 +45,18 @@ namespace CupheadTrainer
         /// </summary>
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            lblProcessStatus.Text = e.ProgressPercentage == 1 ? "Game Process was found!" : "Game process NOT found!";
+            //lblProcessStatus.Text = e.ProgressPercentage == 1 ? "Game Process was found!" : "Game process NOT found!";
+
+            if (e.ProgressPercentage != 1)
+            {
+                lblProcessStatus.Text = "Game Process was NOT found!";
+                chkboxInfiniteHP.Enabled = false;
+            }
+            else
+            {
+                lblProcessStatus.Text = "Game process found!";
+                chkboxInfiniteHP.Enabled = true;
+            }
         }
 
         /// <summary>
@@ -55,6 +67,19 @@ namespace CupheadTrainer
             if (backgroundWorker.IsBusy)
             {
                 backgroundWorker.CancelAsync();
+            }
+        }
+
+        /// <summary>
+        /// A method that handles the infinite health checkbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void chkboxInfiniteHP_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkboxInfiniteHP.Checked)
+            {
+
             }
         }
     }
