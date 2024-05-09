@@ -26,6 +26,9 @@ namespace CupheadTrainer
             backgroundWorker.RunWorkerAsync();
         }
 
+        /// <summary>
+        /// A method that handles background logic such as continuously check if Cuphead process exists.
+        /// </summary>
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             while (!backgroundWorker.CancellationPending)
@@ -36,11 +39,17 @@ namespace CupheadTrainer
             }
         }
 
+        /// <summary>
+        /// A method to handle UI changes.
+        /// </summary>
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             lblProcessStatus.Text = e.ProgressPercentage == 1 ? "Game Process was found!" : "Game process NOT found!";
         }
 
+        /// <summary>
+        /// Needed to ensure clean shutdown of application.
+        /// </summary>
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (backgroundWorker.IsBusy)
