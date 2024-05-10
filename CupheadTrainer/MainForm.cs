@@ -5,6 +5,8 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,6 +19,8 @@ namespace CupheadTrainer
     {
         private Mem memory = new Mem();
         private bool processOpened = false;
+
+        private byte[] originalHealthBytes;
 
         public MainForm()
         {
@@ -45,12 +49,11 @@ namespace CupheadTrainer
         /// </summary>
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //lblProcessStatus.Text = e.ProgressPercentage == 1 ? "Game Process was found!" : "Game process NOT found!";
-
             if (e.ProgressPercentage != 1)
             {
                 lblProcessStatus.Text = "Game Process was NOT found!";
                 chkboxInfiniteHP.Enabled = false;
+                chkboxInfiniteHP.Checked = false;
             }
             else
             {
@@ -70,16 +73,33 @@ namespace CupheadTrainer
             }
         }
 
+        private IntPtr GetModuleBaseAddress(string moduleName)
+        {
+            Process[] processes = Process.GetProcessesByName("Cuphead");
+            foreach (ProcessModule module in processes[0].Modules)
+            {
+                if (module.ModuleName.Equals(moduleName, StringComparison.OrdinalIgnoreCase))
+                {
+                    return module.BaseAddress;
+                }
+            }
+            return IntPtr.Zero;
+        }
+
         /// <summary>
         /// A method that handles the infinite health checkbox.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void chkboxInfiniteHP_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkboxInfiniteHP.Checked)
+            if (chkboxInfiniteHP.Checked && processOpened)
             {
-
+                IntPtr monoBaseAddress = GetModuleBaseAddress("mono.dll");
+                if (monoBaseAddress != IntPtr.Zero)
+                {
+                    string address = monoBaseAddress.ToString("X") + "+00298AE8";
+                    //memory.WriteMemory(address, "int", "3");
+                    memory.FreezeValue(address, "int", "3");
+                }
             }
         }
     }
