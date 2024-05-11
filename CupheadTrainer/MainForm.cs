@@ -91,15 +91,23 @@ namespace CupheadTrainer
         /// </summary>
         private void chkboxInfiniteHP_CheckedChanged(object sender, EventArgs e)
         {
+            //IntPtr monoBaseAddress = GetModuleBaseAddress("mono.dll");
+            string hpAddress = "mono.dll+00264A68,A0,D20,D8,20,60,60,B4";
+
             if (chkboxInfiniteHP.Checked && processOpened)
             {
-                IntPtr monoBaseAddress = GetModuleBaseAddress("mono.dll");
-                if (monoBaseAddress != IntPtr.Zero)
+                if (memory.FreezeValue(hpAddress, "int", "3"))
                 {
-                    string address = monoBaseAddress.ToString("X") + "+00298AE8";
-                    //memory.WriteMemory(address, "int", "3");
-                    memory.FreezeValue(address, "int", "3");
+                    MessageBox.Show("Works.");
                 }
+                else
+                {
+                    MessageBox.Show("Does not work.");
+                }
+            }
+            else
+            {
+                memory.UnfreezeValue(hpAddress);
             }
         }
     }
