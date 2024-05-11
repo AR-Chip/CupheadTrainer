@@ -73,25 +73,11 @@ namespace CupheadTrainer
             }
         }
 
-        private IntPtr GetModuleBaseAddress(string moduleName)
-        {
-            Process[] processes = Process.GetProcessesByName("Cuphead");
-            foreach (ProcessModule module in processes[0].Modules)
-            {
-                if (module.ModuleName.Equals(moduleName, StringComparison.OrdinalIgnoreCase))
-                {
-                    return module.BaseAddress;
-                }
-            }
-            return IntPtr.Zero;
-        }
-
         /// <summary>
         /// A method that handles the infinite health checkbox.
         /// </summary>
         private void chkboxInfiniteHP_CheckedChanged(object sender, EventArgs e)
         {
-            //IntPtr monoBaseAddress = GetModuleBaseAddress("mono.dll");
             string hpAddress = "mono.dll+00264A68,A0,D20,D8,20,60,60,B4";
 
             if (chkboxInfiniteHP.Checked && processOpened)
