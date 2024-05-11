@@ -20,8 +20,6 @@ namespace CupheadTrainer
         private Mem memory = new Mem();
         private bool processOpened = false;
 
-        private byte[] originalHealthBytes;
-
         public MainForm()
         {
             InitializeComponent();
@@ -53,12 +51,13 @@ namespace CupheadTrainer
             {
                 lblProcessStatus.Text = "Game Process was NOT found!";
                 chkboxInfiniteHP.Enabled = false;
-                chkboxInfiniteHP.Checked = false;
+                chkboxInfiniteSP.Enabled = false;
             }
             else
             {
                 lblProcessStatus.Text = "Game process found!";
                 chkboxInfiniteHP.Enabled = true;
+                chkboxInfiniteSP.Enabled = true;
             }
         }
 
@@ -94,6 +93,30 @@ namespace CupheadTrainer
             else
             {
                 memory.UnfreezeValue(hpAddress);
+            }
+        }
+
+        /// <summary>
+        /// A event handler that handles the infinite special power checkbox.
+        /// </summary>
+        private void chkboxInfiniteSP_CheckedChanged(object sender, EventArgs e)
+        {
+            string spAddress = "mono.dll+002675E0,48,b70,20,50,80,60,d8";
+
+            if (chkboxInfiniteSP.Checked && processOpened)
+            {
+                if (memory.FreezeValue(spAddress, "float", "50"))
+                {
+                    MessageBox.Show("Works.");
+                }
+                else
+                {
+                    MessageBox.Show("Does not work.");
+                }
+            }
+            else
+            {
+                memory.UnfreezeValue(spAddress);
             }
         }
     }

@@ -34,6 +34,7 @@
             this.lblProcessStatus = new System.Windows.Forms.Label();
             this.timerProcessFinder = new System.Windows.Forms.Timer(this.components);
             this.chkboxInfiniteHP = new System.Windows.Forms.CheckBox();
+            this.chkboxInfiniteSP = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // backgroundWorker
@@ -71,11 +72,23 @@
             this.chkboxInfiniteHP.UseVisualStyleBackColor = true;
             this.chkboxInfiniteHP.CheckedChanged += new System.EventHandler(this.chkboxInfiniteHP_CheckedChanged);
             // 
+            // chkboxInfiniteSP
+            // 
+            this.chkboxInfiniteSP.AutoSize = true;
+            this.chkboxInfiniteSP.Location = new System.Drawing.Point(129, 26);
+            this.chkboxInfiniteSP.Name = "chkboxInfiniteSP";
+            this.chkboxInfiniteSP.Size = new System.Drawing.Size(74, 17);
+            this.chkboxInfiniteSP.TabIndex = 3;
+            this.chkboxInfiniteSP.Text = "Infinite SP";
+            this.chkboxInfiniteSP.UseVisualStyleBackColor = true;
+            this.chkboxInfiniteSP.CheckedChanged += new System.EventHandler(this.chkboxInfiniteSP_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 211);
+            this.Controls.Add(this.chkboxInfiniteSP);
             this.Controls.Add(this.chkboxInfiniteHP);
             this.Controls.Add(this.lblProcessStatus);
             this.Controls.Add(this.lblProcess);
@@ -93,6 +106,7 @@
         private System.Windows.Forms.Label lblProcessStatus;
         private System.Windows.Forms.Timer timerProcessFinder;
         private System.Windows.Forms.CheckBox chkboxInfiniteHP;
+        private System.Windows.Forms.CheckBox chkboxInfiniteSP;
     }
 }
 
