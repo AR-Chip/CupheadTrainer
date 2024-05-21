@@ -60,6 +60,7 @@ namespace CupheadTrainer
                 chkboxInfiniteCoin.Enabled = false;
                 chkboxInfiniteCoin.Checked = false;
                 chkboxInfiniteSP.Enabled = false;
+                chkboxInfiniteSP.Checked = false;
             }
             else
             {

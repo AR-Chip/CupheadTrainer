@@ -47,30 +47,27 @@
             // lblProcess
             // 
             this.lblProcess.AutoSize = true;
-            this.lblProcess.Location = new System.Drawing.Point(16, 11);
-            this.lblProcess.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProcess.Location = new System.Drawing.Point(12, 9);
             this.lblProcess.Name = "lblProcess";
-            this.lblProcess.Size = new System.Drawing.Size(60, 16);
+            this.lblProcess.Size = new System.Drawing.Size(48, 13);
             this.lblProcess.TabIndex = 0;
             this.lblProcess.Text = "Process:";
             // 
             // lblProcessStatus
             // 
             this.lblProcessStatus.AutoSize = true;
-            this.lblProcessStatus.Location = new System.Drawing.Point(88, 11);
-            this.lblProcessStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProcessStatus.Location = new System.Drawing.Point(66, 9);
             this.lblProcessStatus.Name = "lblProcessStatus";
-            this.lblProcessStatus.Size = new System.Drawing.Size(30, 16);
+            this.lblProcessStatus.Size = new System.Drawing.Size(27, 13);
             this.lblProcessStatus.TabIndex = 1;
             this.lblProcessStatus.Text = "N/A";
             // 
             // chkboxInfiniteHP
             // 
             this.chkboxInfiniteHP.AutoSize = true;
-            this.chkboxInfiniteHP.Location = new System.Drawing.Point(19, 36);
-            this.chkboxInfiniteHP.Margin = new System.Windows.Forms.Padding(4);
+            this.chkboxInfiniteHP.Location = new System.Drawing.Point(14, 29);
             this.chkboxInfiniteHP.Name = "chkboxInfiniteHP";
-            this.chkboxInfiniteHP.Size = new System.Drawing.Size(88, 20);
+            this.chkboxInfiniteHP.Size = new System.Drawing.Size(75, 17);
             this.chkboxInfiniteHP.TabIndex = 2;
             this.chkboxInfiniteHP.Text = "Infinite HP";
             this.chkboxInfiniteHP.UseVisualStyleBackColor = true;
@@ -80,9 +77,10 @@
             // 
             this.chkboxInfiniteCoin.AutoSize = true;
             this.chkboxInfiniteCoin.Enabled = false;
-            this.chkboxInfiniteCoin.Location = new System.Drawing.Point(19, 63);
+            this.chkboxInfiniteCoin.Location = new System.Drawing.Point(15, 72);
+            this.chkboxInfiniteCoin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkboxInfiniteCoin.Name = "chkboxInfiniteCoin";
-            this.chkboxInfiniteCoin.Size = new System.Drawing.Size(96, 20);
+            this.chkboxInfiniteCoin.Size = new System.Drawing.Size(81, 17);
             this.chkboxInfiniteCoin.TabIndex = 3;
             this.chkboxInfiniteCoin.Text = "Infinite Coin";
             this.chkboxInfiniteCoin.UseVisualStyleBackColor = true;
@@ -91,7 +89,8 @@
             // chkboxInfiniteSP
             // 
             this.chkboxInfiniteSP.AutoSize = true;
-            this.chkboxInfiniteSP.Location = new System.Drawing.Point(129, 26);
+            this.chkboxInfiniteSP.Location = new System.Drawing.Point(14, 51);
+            this.chkboxInfiniteSP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkboxInfiniteSP.Name = "chkboxInfiniteSP";
             this.chkboxInfiniteSP.Size = new System.Drawing.Size(74, 17);
             this.chkboxInfiniteSP.TabIndex = 3;
@@ -101,16 +100,14 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(645, 260);
+            this.ClientSize = new System.Drawing.Size(284, 161);
             this.Controls.Add(this.chkboxInfiniteCoin);
-            this.ClientSize = new System.Drawing.Size(484, 211);
             this.Controls.Add(this.chkboxInfiniteSP);
             this.Controls.Add(this.chkboxInfiniteHP);
             this.Controls.Add(this.lblProcessStatus);
             this.Controls.Add(this.lblProcess);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "Cuphead v1.3.4 GOG Trainer";
             this.ResumeLayout(false);
