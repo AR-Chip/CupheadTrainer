@@ -20,6 +20,9 @@ namespace CupheadTrainer
         private Mem memory = new Mem();
         private bool processOpened = false;
 
+        private int[] originalCoinValues = new int[3];
+
+
         private byte[] originalHealthBytes;
 
         public MainForm()
@@ -54,11 +57,14 @@ namespace CupheadTrainer
                 lblProcessStatus.Text = "Game Process was NOT found!";
                 chkboxInfiniteHP.Enabled = false;
                 chkboxInfiniteHP.Checked = false;
+                chkboxInfiniteCoin.Enabled = false;
+                chkboxInfiniteCoin.Checked = false;
             }
             else
             {
                 lblProcessStatus.Text = "Game process found!";
                 chkboxInfiniteHP.Enabled = true;
+                chkboxInfiniteCoin.Enabled = true;
             }
         }
 
@@ -79,12 +85,13 @@ namespace CupheadTrainer
         private void chkboxInfiniteHP_CheckedChanged(object sender, EventArgs e)
         {
             string hpAddress = "mono.dll+00264A68,A0,D20,D8,20,60,60,B4";
+            
 
             if (chkboxInfiniteHP.Checked && processOpened)
             {
                 if (memory.FreezeValue(hpAddress, "int", "3"))
                 {
-                    MessageBox.Show("Works.");
+                    MessageBox.Show("Works");
                 }
                 else
                 {
@@ -94,6 +101,33 @@ namespace CupheadTrainer
             else
             {
                 memory.UnfreezeValue(hpAddress);
+            }
+        }
+
+        private void chkboxInfiniteCoin_CheckedChanged(object sender, EventArgs e)
+        {
+            string firstSlotCoinPointer = "mono.dll+002675E0,A0,4E8,30,20,28,10,28"; 
+            string secondSlotCoinPointer = "mono.dll+002675E0,A0,4E8,30,28,28,10,28";
+            string thirdSlotCoinPointer = "mono.dll+002675E0,A0,4E8,30,30,28,18,58";
+
+            if (chkboxInfiniteCoin.Checked && processOpened)
+            {
+                originalCoinValues[0] = memory.ReadInt(firstSlotCoinPointer);
+                originalCoinValues[1] = memory.ReadInt(secondSlotCoinPointer);
+                originalCoinValues[2] = memory.ReadInt(thirdSlotCoinPointer);
+
+                memory.FreezeValue(firstSlotCoinPointer, "int", "60");
+                memory.FreezeValue(secondSlotCoinPointer, "int", "60");
+                memory.FreezeValue(thirdSlotCoinPointer, "int", "60");
+            }
+            else
+            {
+                memory.UnfreezeValue(firstSlotCoinPointer); 
+                memory.UnfreezeValue(secondSlotCoinPointer);
+                memory.UnfreezeValue(thirdSlotCoinPointer);
+                memory.WriteMemory(firstSlotCoinPointer, "int", originalCoinValues[0].ToString());
+                memory.WriteMemory(secondSlotCoinPointer, "int", originalCoinValues[1].ToString());
+                memory.WriteMemory(thirdSlotCoinPointer, "int", originalCoinValues[2].ToString());
             }
         }
     }
