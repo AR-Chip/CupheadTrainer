@@ -59,12 +59,15 @@ namespace CupheadTrainer
                 chkboxInfiniteHP.Checked = false;
                 chkboxInfiniteCoin.Enabled = false;
                 chkboxInfiniteCoin.Checked = false;
+                chkboxInfiniteSP.Enabled = false;
+                chkboxInfiniteSP.Checked = false;
             }
             else
             {
                 lblProcessStatus.Text = "Game process found!";
                 chkboxInfiniteHP.Enabled = true;
                 chkboxInfiniteCoin.Enabled = true;
+                chkboxInfiniteSP.Enabled = true;
             }
         }
 
@@ -128,6 +131,30 @@ namespace CupheadTrainer
                 memory.WriteMemory(firstSlotCoinPointer, "int", originalCoinValues[0].ToString());
                 memory.WriteMemory(secondSlotCoinPointer, "int", originalCoinValues[1].ToString());
                 memory.WriteMemory(thirdSlotCoinPointer, "int", originalCoinValues[2].ToString());
+            }
+        }
+
+        /// <summary>
+        /// A event handler that handles the infinite special power checkbox.
+        /// </summary>
+        private void chkboxInfiniteSP_CheckedChanged(object sender, EventArgs e)
+        {
+            string spAddress = "mono.dll+002675E0,48,b70,20,50,80,60,d8";
+
+            if (chkboxInfiniteSP.Checked && processOpened)
+            {
+                if (memory.FreezeValue(spAddress, "float", "50"))
+                {
+                    MessageBox.Show("Works.");
+                }
+                else
+                {
+                    MessageBox.Show("Does not work.");
+                }
+            }
+            else
+            {
+                memory.UnfreezeValue(spAddress);
             }
         }
     }
