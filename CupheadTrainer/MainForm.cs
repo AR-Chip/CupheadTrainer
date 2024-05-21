@@ -89,7 +89,7 @@ namespace CupheadTrainer
 
             if (chkboxInfiniteHP.Checked && processOpened)
             {
-                if (memory.FreezeValue(hpAddress, "int", "27"))
+                if (memory.FreezeValue(hpAddress, "int", "3"))
                 {
                     MessageBox.Show("Works");
                 }
